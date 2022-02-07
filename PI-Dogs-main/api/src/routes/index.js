@@ -101,8 +101,13 @@ router.get('/dogs/:id',async(req,res)=>{
 // Obtener todos los temperamentos posibles
 // En una primera instancia deberán obtenerlos desde la API externa y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
 router.get('/temperament',async(req,res)=>{
-    let temperamentList = await Temperament.findAll();
-    res.status(200).send(temperamentList)
+    let dogList = await getAllDogs();
+    res.status(200).send(dogList.map((dog) => {
+        return {
+          temperament: dog.temperament,
+        };
+      })
+    );
 })
 // [ ] POST /dog:
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
