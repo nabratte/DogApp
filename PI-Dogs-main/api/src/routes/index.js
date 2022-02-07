@@ -132,12 +132,38 @@ router.get('/dogs/:id',async(req,res)=>{
 // En una primera instancia deberán obtenerlos desde la API externa y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
 router.get("/temperament", async (req, res) => {
   await setDbTemperaments();
-  const allTemperaments = await getDbTemperaments();
+  var allTemperaments = await getDbTemperaments();
   res.status(200).json(allTemperaments);
 });
 // [ ] POST /dog:
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
 // Crea una raza de perro en la base de datos
 
+router.post("/dog",async(req,res)=>{
+    let {
+        id,
+        name,
+        weight,
+        height,
+        temperament,
+        life_span,
+        image,
+    }= req.body;
 
+    let dogCreated = await Dog.create({
+        id,
+        name,
+        weight,
+        height,
+        life_span,
+        image,
+    });
+
+    let temperamentDB = await Temperament.findAll({
+        where:{name : temperament}
+    });
+
+    dogCreated.addTemperament(temperamentDB);
+    res.send("Dog successfully created")
+})
 module.exports = router;
