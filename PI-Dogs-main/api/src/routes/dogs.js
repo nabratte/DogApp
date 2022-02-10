@@ -19,22 +19,44 @@ const getApiInfo = async () =>{
     return apiInfo;
 }
 
-const getDbInfo = async ()=>{
-    return await Dog.findAll({
-        include:{
-            model:Temperament,
-            attributes: ['name'],
-            through:{
-                attributes:[],
-            },
+const getDbInfo = async () => {
+    function getTemperament(temperament) {
+      let string = "";
+      for (var i = 0; i < temperament.length; i++) {
+        string = string + temperament[i].name + ", ";
+      }
+      return string.slice(0, string.length - 2);
+    }
+    let allDbDogs = await Dog.findAll({
+      include: [
+        {
+          model: Temperament,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
-    })
-}
+      ],
+    });
+    let respuesta = await allDbDogs.map((dog) => {
+      return {
+        id: dog.id,
+        name: dog.name,
+        weight: dog.weight,
+        height: dog.height,
+        life_span: dog.life_span,
+        temperament: getTemperament(dog.temperaments),
+        fromDataBase: dog.fromDataBase,
+        image: dog.image,
+      };
+    });
+    return respuesta;
+  };
 
 const getAllDogs = async ()=>{
     const apiInfo = await getApiInfo();
     const dbInfo = await getDbInfo();
-    const generalInfo = apiInfo.concat(dbInfo);
+    const generalInfo = dbInfo.concat(apiInfo);
     return generalInfo; 
 }
 
@@ -48,6 +70,7 @@ dogsRouter.get('/', async(req,res)=>{
             return {
                 name: dog.name,
                 weight: dog.weight,
+                height: dog.height,
                 image: dog.image,
                 temperament: dog.temperament,
                 fromDataBase: dog.fromDataBase,
@@ -71,5 +94,6 @@ dogsRouter.get('/', async(req,res)=>{
         catch(error){return error}        
     }
 })
+
 
 module.exports = dogsRouter;

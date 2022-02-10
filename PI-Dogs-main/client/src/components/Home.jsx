@@ -1,10 +1,10 @@
 import React, {useEffect, useState } from "react";
 import {useDispatch,useSelector} from "react-redux";
-import { getDogs, filterDogsByOrigin, orderDirection, filterType } from "../actions";
+import { getDogs, filterDogsByOrigin, orderDirection, getTemperaments } from "../actions";
 import { Link } from "react-router-dom";
 import DogCard from "./DogCards";
 import Pagination from "./Pagination";
-import TempéramentCheckBox from "./CheckBox";
+//import TempéramentCheckBox from "./CheckBox";
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -14,7 +14,8 @@ export default function Home(){
     const indexOfLastDog = currentPage * dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDogs = allDogs.slice(indexOfFirstDog,indexOfLastDog);
-    const [order,setOrder] = useState("");
+    const [,setOrder] = useState("");
+    //const allTemperaments = useSelector((state)=>state.allTemperaments);
 
     const pagination = (pageNumber) =>{
         setCurrentPage(pageNumber);
@@ -22,6 +23,7 @@ export default function Home(){
 
     useEffect(()=>{
         dispatch(getDogs())
+        dispatch(getTemperaments())
     },[dispatch])
 
     function handleClick(e){
@@ -38,13 +40,6 @@ export default function Home(){
     function handleSort(e){
         e.preventDefault();
         dispatch(orderDirection(e.target.value));
-        setCurrentPage(1);
-        setOrder(`In Order ${e.target.value}`)
-    }
-
-    function handleFilterType(e){//ta roto, no funca
-        e.preventDefault();
-        dispatch(filterType(e.target.value));
         setCurrentPage(1);
         setOrder(`In Order ${e.target.value}`)
     }
@@ -73,7 +68,7 @@ export default function Home(){
             </div>
             <div>
                 <h3>Order by</h3>
-                <select onChange={e=>handleFilterType(e)}>
+                <select >
                     <option value="alpha">Alphabetic</option>
                     <option value="weight">Weight</option>
                 </select>

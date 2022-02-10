@@ -1,7 +1,8 @@
 const initialState = {
     dogs:[],
     allDogs:[],
-    var:"name",
+    temperaments:[],
+    allTemperaments:[],
 }
 
 function rootReducer(state = initialState,action){
@@ -23,19 +24,19 @@ function rootReducer(state = initialState,action){
         case "ORDER_DIRECTION":
             let sortedArr = action.payload === "asc"?
                 state.dogs.sort(function(a,b){
-                    if (a[state.var]>b[state.var]) {
+                    if (a.name>b.name) {
                         return 1;
                     }
-                    if (b[state.var]>a[state.var]){
+                    if (b.name>a.name){
                         return -1;
                     }
                     return 0;
                 }) :
                 state.dogs.sort(function(a,b){
-                    if (a[state.var]>b[state.var]) {
+                    if (a.name>b.name) {
                         return -1;
                     }
-                    if (b[state.var]>a[state.var]){
+                    if (b.name>a.name){
                         return 1;
                     }
                     return 0;
@@ -44,14 +45,16 @@ function rootReducer(state = initialState,action){
                 ...state,
                 dogs:sortedArr
             }
-        case "FILTER_TYPE":
-            action.payload === "weight" ? state.var = "weigth": state.var="alpha"
-        return{
-            ...state
-        }
+        case "GET_TEMPERAMENTS":
+            return{
+                ...state,
+                temperaments:action.payload,
+                allTemperaments:action.payload,
+            }
 
         default : return state;
     }
 }
+
 
 export default rootReducer;
