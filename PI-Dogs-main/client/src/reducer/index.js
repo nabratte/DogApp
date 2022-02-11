@@ -1,9 +1,11 @@
 const initialState = {
     dogs:[],
     allDogs:[],
+    dogsTemp:[],
     temperaments:[],
     allTemperaments:[],
 }
+
 
 function rootReducer(state = initialState,action){
     switch(action.type){
@@ -12,6 +14,7 @@ function rootReducer(state = initialState,action){
                 ...state,
                 dogs:action.payload,
                 allDogs:action.payload,
+                dogsTemp:action.payload
             }
         case "FILTER_BY_ORIGIN":
             
@@ -51,6 +54,22 @@ function rootReducer(state = initialState,action){
                 temperaments:action.payload,
                 allTemperaments:action.payload,
             }
+        case "FILTER_BY_TEMPERAMENT":
+            var tempDogs = state.dogsTemp;       
+            tempDogs = tempDogs.filter(e=>e.temperament!==undefined)
+            const arrayOfTemps = action.payload;
+            console.log(tempDogs.map(e=> console.log(e.temperament)))
+            const filteredByTemps = tempDogs.filter(e=>arrayOfTemps.every(d=>e.temperament.split(", ").includes(d)))
+            console.log(filteredByTemps)
+            return{
+                ...state,
+            dogs:filteredByTemps
+            }
+            case "SEARCH_BY_NAME":
+                return{
+                    ...state,
+                    dogs:action.payload
+                }
 
         default : return state;
     }

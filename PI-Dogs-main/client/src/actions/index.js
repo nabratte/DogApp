@@ -25,7 +25,6 @@ export function orderDirection(payload){
     }
 }
 
-
 export function getTemperaments(){
     return async function(dispatch){
         var json = await axios.get("http://localhost:3001/temperament",{});
@@ -34,4 +33,25 @@ export function getTemperaments(){
         payload: json.data,
         })
     }    
+}
+
+export function filterByTemperament(payload){
+    return{
+        type:'FILTER_BY_TEMPERAMENT',
+        payload
+    }
+}
+
+export function searchByName(payload){
+    return async function (dispatch){
+        try{
+            var json= await axios.get("http://localhost:3001/dogs?name="+payload);
+            return dispatch({
+                type:"SEARCH_BY_NAME",
+                payload:json.data
+            })
+        }catch(err){
+            console.log(err)
+        }
+    }
 }

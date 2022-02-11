@@ -1,10 +1,11 @@
-import React, {useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch,useSelector} from "react-redux";
-import { getDogs, filterDogsByOrigin, orderDirection, getTemperaments } from "../actions";
+import { getDogs, filterDogsByOrigin, orderDirection, getTemperaments, filterByTemperament } from "../actions";
 import { Link } from "react-router-dom";
 import DogCard from "./DogCards";
 import Pagination from "./Pagination";
-//import TempéramentCheckBox from "./CheckBox";
+import Select from "react-select";
+import SearchBar from "./SearchBar";
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -15,7 +16,10 @@ export default function Home(){
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDogs = allDogs.slice(indexOfFirstDog,indexOfLastDog);
     const [,setOrder] = useState("");
-    //const allTemperaments = useSelector((state)=>state.allTemperaments);
+    const allTemperaments = useSelector((state)=>state.allTemperaments);
+    const arrTemperaments = allTemperaments?.map((e)=>{
+        return({value:e.name,label:e.name})
+    })
 
     const pagination = (pageNumber) =>{
         setCurrentPage(pageNumber);
@@ -37,6 +41,15 @@ export default function Home(){
         setCurrentPage(1);
     }
 
+    function handleFilterTemperament(e){
+        const newarr=[]
+        e.forEach(el => {newarr.push(el.value)     
+        });
+        console.log(newarr)
+        dispatch(filterByTemperament(newarr));
+        setCurrentPage(1);
+    }
+
     function handleSort(e){
         e.preventDefault();
         dispatch(orderDirection(e.target.value));
@@ -47,8 +60,9 @@ export default function Home(){
     return (
         <div>
             <Link to ='/dog'>
-                Create Dog            
+                Create a Dog            
             </Link>
+            <SearchBar/>
             <h1>Dogs are fun!</h1>
             <button onClick={e=>{handleClick(e)}}>Reload all dogs</button>
             <div>
@@ -61,10 +75,7 @@ export default function Home(){
             </div>
             <div>
                 <h3>Filter by temperament</h3>
-                <select >
-                    <option value="temp1">temp1</option>
-                    <option value="temp2">temp2</option>
-                </select>
+                <Select options={arrTemperaments} isMulti onChange={e=>handleFilterTemperament(e)}/>
             </div>
             <div>
                 <h3>Order by</h3>
@@ -80,15 +91,7 @@ export default function Home(){
                     <option value="des">Descendant</option>
                 </select>
             </div>
-            {/* <div>
-                <form>
-                    <h3>Temperaments</h3>
-                    <input type="checkbox" value="tem1"/>temp1
-                    <input type="checkbox" value="temp2"/>temp2
-                    <input type="checkbox" value="temp3"/>temp3
-                </form>    
-            </div>
-            <TempéramentCheckBox/> */}
+            
             <Pagination
             dogsPerPage={dogsPerPage}
             allDogs={allDogs.length}
