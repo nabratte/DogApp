@@ -1,9 +1,10 @@
+
 import React, {useEffect} from "react";
 import {useDispatch,useSelector} from "react-redux";
 import {filterByTemperament,getTemperaments } from "../actions";
 import Select from "react-select";
 
-export default function ChecBox(){
+export default function ChecBox({onChange}){
 
     const dispatch = useDispatch();
     const allTemperaments = useSelector((state)=>state.allTemperaments);
@@ -15,14 +16,7 @@ export default function ChecBox(){
         dispatch(getTemperaments())
     },[dispatch])
 
-    function handleFilterTemperament(e){
-        const newarr=[]
-        e.forEach(el => {newarr.push(el.value)     
-        });
-        dispatch(filterByTemperament(newarr));
-    }
-
     return(
-        <Select options={arrTemperaments} isMulti onChange={e=>handleFilterTemperament(e)}/>
+        <Select options={arrTemperaments} isMulti onChange={onChange}/>
     )
 }
