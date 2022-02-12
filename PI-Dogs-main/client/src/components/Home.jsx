@@ -101,7 +101,7 @@ export default function Home(){
                 return (
                     <div>
                         <Link to={"/home"}>
-                            <DogCard name={e.name} image={e.image} weight={e.weight} temperament={e.temperament}/>
+                            <DogCard name={e.name} image={e.image? e.image:<img src="https://i.pinimg.com/564x/39/2c/cb/392ccbe168b3a810bc4a961c9634ca4d.jpg" alt=""/>} weight={e.weight} temperament={e.temperament}/>
                         </Link>
                     </div>   
                 )
