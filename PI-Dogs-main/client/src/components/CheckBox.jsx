@@ -1,7 +1,7 @@
 
 import React, {useEffect} from "react";
 import {useDispatch,useSelector} from "react-redux";
-import {filterByTemperament,getTemperaments } from "../actions";
+import {getTemperaments } from "../actions";
 import Select from "react-select";
 
 export default function ChecBox({onChange}){
