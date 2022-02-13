@@ -11,7 +11,9 @@ export default function Home(){
     const dispatch = useDispatch();
     const allDogs = useSelector((state)=>state.dogs);
     const [currentPage,setCurrentPage] = useState(1);
-    const [dogsPerPage,] = useState(8);
+    const [dogsPerPage, setDogsPerPage] = useState(8);
+    const [order,setOrder]=useState("");
+    const [orderType,setOrderType]=useState("");
     const indexOfLastDog = currentPage * dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDogs = allDogs.slice(indexOfFirstDog,indexOfLastDog);
@@ -50,13 +52,18 @@ export default function Home(){
     function handleSort(e){
         e.preventDefault()
         dispatch(orderDirection(e.target.value))
+        console.log("estado general")
         console.log(allDogs)
+        console.log("perros que se renderizan")
+        console.log(currentDogs)
         setCurrentPage(1);
+        setOrder(`Ordered by ${e.target.value}`)
     }
 
     function handleOrderState(e){
         console.log(allDogs)
         dispatch(changeOrderStatus(e.target.value));
+        setOrderType(`Order type ${e.target.value}`)
     }
 
     return (
@@ -83,8 +90,8 @@ export default function Home(){
                 <h3>Order by</h3>
                 <select onChange={e=>handleOrderState(e)}>
                     <option value="">Select order type</option>
-                    <option value="alpha" name="asc">Alphabetic</option>
-                    <option value="weight" name="asc">Weight</option>
+                    <option value="alpha" >Alphabetic</option>
+                    <option value="weight" >Weight</option>
                 </select>
             </div>
             <div>

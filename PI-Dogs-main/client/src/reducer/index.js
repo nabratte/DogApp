@@ -1,6 +1,7 @@
 const initialState = {
     dogs:[],
     allDogs:[],
+    orderDogs:[],
     dogsTemp:[],
     temperaments:[],
     allTemperaments:[],
@@ -15,6 +16,7 @@ function rootReducer(state = initialState,action){
             return{
                 ...state,
                 dogs:action.payload,
+                orderDogs:action.payload,
                 allDogs:action.payload,
                 dogsTemp:action.payload
             }
@@ -34,13 +36,14 @@ function rootReducer(state = initialState,action){
                 dogs:state.allDogs    
             }
         case "ORDER_DIRECTION":
-            console.log(action.payload) 
-            console.log(state)
-            state.dir=action.payload
+            let orderDogs=state.orderDogs;
+            console.log(action.payload); 
+            console.log(state);
+            state.dir=action.payload;
             if(state.ord!==""){
                 console.log(state)
                 if(state.ord==="alpha"){
-                        let sortedArr = state.dogs
+                        let sortedArr = orderDogs
                         state.dir === "asc"?
                         sortedArr.sort(function(a,b){
                             if (a.name>b.name) {
@@ -65,7 +68,7 @@ function rootReducer(state = initialState,action){
                         dogs:sortedArr
                     }
                 }else if (state.ord==="weight"){
-                    let sortedArr=state.dogs
+                    let sortedArr=orderDogs;
                     state.dir === "asc"?
                         sortedArr.sort(function(a,b){
                             if (parseInt(a.weight.split(" - ").shift())>parseInt(b.weight.split(" - ").shift())) {
@@ -89,17 +92,17 @@ function rootReducer(state = initialState,action){
                         ...state,
                         dogs:sortedArr,
                     }
-            //     }else{
-            //         return {
-            //             ...state,
-            //             dogs:allDogs
-            //         }
-            //     }
-            // }else{
-            //     return{
-            //         ...state,
-            //         dogs:allDogs
-                 }
+                }else{
+                    return {
+                        ...state,
+                        dogs:orderDogs
+                    }
+                }
+            }else{
+                return{
+                    ...state,
+                    dogs:orderDogs
+                }
             }    
         case "GET_TEMPERAMENTS":
             return{
