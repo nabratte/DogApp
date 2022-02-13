@@ -62,3 +62,10 @@ export function postDog(payload){
         return response;
     }
 }
+
+export function changeOrderStatus(payload){
+    return {
+        type:"ORDER_CHANGER",
+        payload               
+    }
+}

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch,useSelector} from "react-redux";
-import { getDogs, filterDogsByOrigin, orderDirection, getTemperaments, filterByTemperament } from "../actions";
+import { getDogs, filterDogsByOrigin, orderDirection, getTemperaments, filterByTemperament, changeOrderStatus } from "../actions";
 import { Link } from "react-router-dom";
 import DogCard from "./DogCards";
 import Pagination from "./Pagination";
@@ -15,7 +15,6 @@ export default function Home(){
     const indexOfLastDog = currentPage * dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDogs = allDogs.slice(indexOfFirstDog,indexOfLastDog);
-    const [,setOrder] = useState("");
     const allTemperaments = useSelector((state)=>state.allTemperaments);
     const arrTemperaments = allTemperaments?.map((e)=>{
         return({value:e.name,label:e.name})
@@ -43,18 +42,21 @@ export default function Home(){
 
     function handleFilterTemperament(e){
         const newarr=[]
-        e.forEach(el => {newarr.push(el.value)     
-        });
-        console.log(newarr)
+        e.forEach(el => {newarr.push(el.value)});
         dispatch(filterByTemperament(newarr));
         setCurrentPage(1);
     }
 
     function handleSort(e){
-        e.preventDefault();
-        dispatch(orderDirection(e.target.value));
+        e.preventDefault()
+        dispatch(orderDirection(e.target.value))
+        console.log(allDogs)
         setCurrentPage(1);
-        setOrder(`In Order ${e.target.value}`)
+    }
+
+    function handleOrderState(e){
+        console.log(allDogs)
+        dispatch(changeOrderStatus(e.target.value));
     }
 
     return (
@@ -79,33 +81,36 @@ export default function Home(){
             </div>
             <div>
                 <h3>Order by</h3>
-                <select >
-                    <option value="alpha">Alphabetic</option>
-                    <option value="weight">Weight</option>
+                <select onChange={e=>handleOrderState(e)}>
+                    <option value="">Select order type</option>
+                    <option value="alpha" name="asc">Alphabetic</option>
+                    <option value="weight" name="asc">Weight</option>
                 </select>
             </div>
             <div>
                 <h3>Order direction</h3>
                 <select onChange={e=>handleSort(e)} >
+                    <option value="">Select order direction</option>
                     <option value="asc">Ascendant</option>
                     <option value="des">Descendant</option>
                 </select>
             </div>
-            
-            <Pagination
-            dogsPerPage={dogsPerPage}
-            allDogs={allDogs.length}
-            pagination = {pagination}
-            />
-            {currentDogs?.map((e)=>{
-                return (
-                    <div>
-                        <Link to={"/home"}>
-                            <DogCard name={e.name} image={e.image? e.image:<img src="https://i.pinimg.com/564x/39/2c/cb/392ccbe168b3a810bc4a961c9634ca4d.jpg" alt=""/>} weight={e.weight} temperament={e.temperament}/>
-                        </Link>
-                    </div>   
-                )
-            })}
+            <div>
+                <Pagination
+                dogsPerPage={dogsPerPage}
+                allDogs={allDogs.length}
+                pagination = {pagination}
+                />
+                {currentDogs?.map((e)=>{
+                    return (
+                        <div>
+                            <Link to={"/home"}>
+                                <DogCard name={e.name} image={e.image? e.image:<img src="https://i.pinimg.com/564x/39/2c/cb/392ccbe168b3a810bc4a961c9634ca4d.jpg" alt=""/>} weight={e.weight} temperament={e.temperament}/>
+                            </Link>
+                        </div>   
+                    )
+                })}
+            </div>
         </div>
     )
 }

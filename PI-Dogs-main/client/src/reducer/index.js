@@ -4,6 +4,8 @@ const initialState = {
     dogsTemp:[],
     temperaments:[],
     allTemperaments:[],
+    ord:"alpha",
+    dir:"asc"
 }
 
 
@@ -16,38 +18,89 @@ function rootReducer(state = initialState,action){
                 allDogs:action.payload,
                 dogsTemp:action.payload
             }
-        case "FILTER_BY_ORIGIN":
-            
+        case "FILTER_BY_ORIGIN":            
             const allDogs = state.allDogs;
             const originFiltered = action.payload === "db"? allDogs.filter(d=>d.fromDataBase) : allDogs.filter(d=>!d.fromDataBase)
             return{
                 ...state,
                 dogs: action.payload === "all"? state.allDogs : originFiltered
             }    
-        case "ORDER_DIRECTION":
-            let sortedArr = action.payload === "asc"?
-                state.dogs.sort(function(a,b){
-                    if (a.name>b.name) {
-                        return 1;
-                    }
-                    if (b.name>a.name){
-                        return -1;
-                    }
-                    return 0;
-                }) :
-                state.dogs.sort(function(a,b){
-                    if (a.name>b.name) {
-                        return -1;
-                    }
-                    if (b.name>a.name){
-                        return 1;
-                    }
-                    return 0;
-                })
+        case "ORDER_CHANGER":
+            console.log(action.payload) 
+            console.log(state)
+            state.ord=action.payload          
             return{
                 ...state,
-                dogs:sortedArr
+                dogs:state.allDogs    
             }
+        case "ORDER_DIRECTION":
+            console.log(action.payload) 
+            console.log(state)
+            state.dir=action.payload
+            if(state.ord!==""){
+                console.log(state)
+                if(state.ord==="alpha"){
+                        let sortedArr = state.dogs
+                        state.dir === "asc"?
+                        sortedArr.sort(function(a,b){
+                            if (a.name>b.name) {
+                                return 1;
+                            }
+                            if (b.name>a.name){
+                                return -1;
+                            }
+                            return 0;
+                        }) :
+                        sortedArr.sort(function(a,b){
+                            if (a.name>b.name) {
+                                return -1;
+                            }
+                            if (b.name>a.name){
+                                return 1;
+                            }
+                            return 0;
+                        })
+                    return{
+                        ...state,
+                        dogs:sortedArr
+                    }
+                }else if (state.ord==="weight"){
+                    let sortedArr=state.dogs
+                    state.dir === "asc"?
+                        sortedArr.sort(function(a,b){
+                            if (parseInt(a.weight.split(" - ").shift())>parseInt(b.weight.split(" - ").shift())) {
+                                return 1;
+                            }
+                            if (parseInt(b.weight.split(" - ").shift())>parseInt(a.weight.split(" - ").shift())){
+                                return -1;
+                            }
+                            return 0;
+                        }) :
+                        sortedArr.sort(function(a,b){
+                            if (parseInt(a.weight.split(" - ").shift())>parseInt(b.weight.split(" - ").shift())) {
+                                return -1;
+                            }
+                            if (parseInt(b.weight.split(" - ").shift())>parseInt(a.weight.split(" - ").shift())){
+                                return 1;
+                            }
+                            return 0;
+                        })
+                    return{
+                        ...state,
+                        dogs:sortedArr,
+                    }
+            //     }else{
+            //         return {
+            //             ...state,
+            //             dogs:allDogs
+            //         }
+            //     }
+            // }else{
+            //     return{
+            //         ...state,
+            //         dogs:allDogs
+                 }
+            }    
         case "GET_TEMPERAMENTS":
             return{
                 ...state,
@@ -63,7 +116,7 @@ function rootReducer(state = initialState,action){
             console.log(filteredByTemps)
             return{
                 ...state,
-            dogs:filteredByTemps
+                dogs:filteredByTemps
             }
             case "SEARCH_BY_NAME":
                 return{
