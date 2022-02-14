@@ -70,13 +70,13 @@ export function changeOrderStatus(payload){
     }
 }
 
-export function getDetail(payload){
+export function getDetail(id){
     return async function (dispatch){
         try{
-            var json = await axios.get("http://localhost:3001/dogs/"+payload);
+            var json = await axios.get("http://localhost:3001/dogs/"+id);
             return dispatch({
                 type: "GET_DETAIL",
-                payload:json.data
+                payload: json.data
             })
         }catch(err){
             console.log(err)

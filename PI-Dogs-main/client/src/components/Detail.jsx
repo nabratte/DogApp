@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../actions";
 import { useEffect } from "react";
 
-
-
 export default function Details(props){
+    console.log(props)
     const dispatch=useDispatch()
     useEffect(()=>{
         dispatch(getDetail(props.match.params.id))
     },[dispatch])
+
     const myDog = useSelector((state)=>state.detail)
 
     return( 
@@ -26,8 +26,13 @@ export default function Details(props){
                     <h3>Temperaments:{myDog[0].temperament}</h3>
                 </div>
                 :
-                <h1>Dog not found</h1>
+                <h1>Loading...</h1>
             }
+            <Link to={'/home'}>
+                <button>
+                    Back to Home
+                </button>
+            </Link>
         </div>
     )
 }

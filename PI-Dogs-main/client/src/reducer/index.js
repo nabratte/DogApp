@@ -17,7 +17,6 @@ function rootReducer(state = initialState,action){
                 ...state,
                 dogs:action.payload,
                 allDogs:action.payload,
-                allDogs:action.payload,
                 dogsTemp:action.payload
             }
         case "FILTER_BY_ORIGIN":            
@@ -36,14 +35,14 @@ function rootReducer(state = initialState,action){
                 dogs:state.allDogs    
             }
         case "ORDER_DIRECTION":
-            let allDogs=state.allDogs;
+            const orderDogs=state.allDogs;
             console.log(action.payload); 
             console.log(state);
             state.dir=action.payload;
             if(state.ord!==""){
                 console.log(state)
                 if(state.ord==="alpha"){
-                        let sortedArr = allDogs
+                        let sortedArr = orderDogs
                         state.dir === "asc"?
                         sortedArr.sort(function(a,b){
                             if (a.name>b.name) {
@@ -68,7 +67,7 @@ function rootReducer(state = initialState,action){
                         dogs:sortedArr
                     }
                 }else if (state.ord==="weight"){
-                    let sortedArr=allDogs;
+                    let sortedArr=orderDogs;
                     state.dir === "asc"?
                         sortedArr.sort(function(a,b){
                             if (parseInt(a.weight.split(" - ").shift())>parseInt(b.weight.split(" - ").shift())) {
@@ -134,7 +133,7 @@ function rootReducer(state = initialState,action){
         case "GET_DETAIL":
             return{
                 ...state,
-
+                detail:action.payload
             }
         default : return state;
     }

@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage';
 import React from 'react';
 import Home from './components/Home';
 import DogCreator from './components/DogCreator'
+import Details from './components/Detail';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route exact path="/" element={<LandingPage/>}/>
           <Route exact path="/home" element={<Home/>}/>
           <Route exact path='/dog' element={<DogCreator/>}/>
+          <Route exact path="/dogs/:id" element={<Details/>}/>
         </Routes>
     </div>
   );

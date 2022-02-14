@@ -1,15 +1,11 @@
 import React, { useState} from "react";
-import {Link , Navigate} from "react-router-dom";
+import {Link } from "react-router-dom";
 import {postDog  } from "../actions";
 import {useDispatch} from "react-redux";
 import CheckBox from "./CheckBox";
 
 export default function CharacterCreate(){
     const dispatch = useDispatch()
-
-    function navigate(rute){
-        return <Navigate to = {rute} />;
-    }
 
     const [minMax,setMinMax] = useState({
         heightMin:"",
@@ -66,9 +62,10 @@ export default function CharacterCreate(){
             height:"",
             life_span:"",
             temperament:[]
-        });
-        navigate('/home');
-    }
+        })
+        alert("Dog succesfully created!!")
+        ;}
+    
 
     function handleFilterTemperament(e){
         console.log(e)

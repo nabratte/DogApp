@@ -39,7 +39,7 @@ const getAllDogs = async ()=>{
 }
 
 dogRouter.get('/:id',async(req,res)=>{
-    var {id}=req.params;
+    let {id}=req.params;
     let dogList = await getAllDogs();
     let dogId = await dogList.filter(d=>d.id==(id))
     dogId.length ?
