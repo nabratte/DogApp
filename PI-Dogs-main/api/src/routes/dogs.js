@@ -82,10 +82,13 @@ dogsRouter.get('/', async(req,res)=>{
         try{
         var allDogs = dogList.map((dog) => {
             return {
+              id: dog.id,
               name: dog.name,
               weight: dog.weight,
+              height: dog.height,
               image: dog.image,
               temperament: dog.temperament,
+              life_span: dog.life_span,
               fromDataBase: dog.fromDataBase,
             };
         })

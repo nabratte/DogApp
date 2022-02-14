@@ -1,10 +1,10 @@
 const initialState = {
     dogs:[],
     allDogs:[],
-    orderDogs:[],
     dogsTemp:[],
     temperaments:[],
     allTemperaments:[],
+    detail:[],
     ord:"alpha",
     dir:"asc"
 }
@@ -16,7 +16,7 @@ function rootReducer(state = initialState,action){
             return{
                 ...state,
                 dogs:action.payload,
-                orderDogs:action.payload,
+                allDogs:action.payload,
                 allDogs:action.payload,
                 dogsTemp:action.payload
             }
@@ -36,14 +36,14 @@ function rootReducer(state = initialState,action){
                 dogs:state.allDogs    
             }
         case "ORDER_DIRECTION":
-            let orderDogs=state.orderDogs;
+            let allDogs=state.allDogs;
             console.log(action.payload); 
             console.log(state);
             state.dir=action.payload;
             if(state.ord!==""){
                 console.log(state)
                 if(state.ord==="alpha"){
-                        let sortedArr = orderDogs
+                        let sortedArr = allDogs
                         state.dir === "asc"?
                         sortedArr.sort(function(a,b){
                             if (a.name>b.name) {
@@ -68,7 +68,7 @@ function rootReducer(state = initialState,action){
                         dogs:sortedArr
                     }
                 }else if (state.ord==="weight"){
-                    let sortedArr=orderDogs;
+                    let sortedArr=allDogs;
                     state.dir === "asc"?
                         sortedArr.sort(function(a,b){
                             if (parseInt(a.weight.split(" - ").shift())>parseInt(b.weight.split(" - ").shift())) {
@@ -95,13 +95,13 @@ function rootReducer(state = initialState,action){
                 }else{
                     return {
                         ...state,
-                        dogs:orderDogs
+                        dogs:allDogs
                     }
                 }
             }else{
                 return{
                     ...state,
-                    dogs:orderDogs
+                    dogs:allDogs
                 }
             }    
         case "GET_TEMPERAMENTS":
@@ -121,15 +121,21 @@ function rootReducer(state = initialState,action){
                 ...state,
                 dogs:filteredByTemps
             }
-            case "SEARCH_BY_NAME":
-                return{
-                    ...state,
-                    dogs:action.payload
-                }
-            case "POST_DOG":
-                return{
-                    ...state,
-                }
+        case "SEARCH_BY_NAME":
+            return{
+                ...state,
+                dogs:action.payload
+            }
+        case "POST_DOG":
+            return{
+                ...state,
+                detail:action.payload
+            }
+        case "GET_DETAIL":
+            return{
+                ...state,
+
+            }
         default : return state;
     }
 }
