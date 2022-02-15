@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
     image:{
       type:DataTypes.STRING,
       allowNull:true,
-      defaultValue: "https://i.pinimg.com/564x/39/2c/cb/392ccbe168b3a810bc4a961c9634ca4d.jpg",
+      defaultValue:"https://i.pinimg.com/474x/17/8d/6d/178d6d0a9d198205f7c03d47c2567010.jpg"
     },
   });
 };

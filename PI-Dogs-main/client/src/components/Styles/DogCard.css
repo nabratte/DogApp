@@ -1,0 +1,79 @@
+.Card{
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    margin: 0.5rem;
+    border-style: solid;
+    border-radius: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    height: 35rem;
+    border-color: #494141;
+    background-color: #C9B4B4;
+}
+.imageContainer{
+    padding: 0.1rem;
+    margin: 0%;
+    background-color: #494141;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    border-style: solid;
+    border-color: #4A4242;
+    border-width: 0.5rem;
+    border-radius: 500px;
+    float: inline-start;
+}
+
+.principalImage{
+    display: flex;
+    border-radius: 400px;
+}
+
+.InfoContainer{
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+h2{
+    font-family: 'Kalam', cursive;
+    color: #272424;
+    text-decoration: none;
+    font-size: 1.85rem;
+}
+
+
+.button{
+    float: right;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 15rem;
+    height: auto;
+    border-radius: 3rem;
+    border-style: solid;
+    border-color: #4A4242;
+    border-width: 0.3rem;
+    color: #4A4242;
+    background-color: #F4DADA;
+    font-size: 1.2rem;
+    transform-style: none;
+}
+
+.ButtonContainer{
+    padding-top: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+
+h5{
+    color: #4A4242;
+    text-decoration: none;
+    font-size: 1rem;
+}

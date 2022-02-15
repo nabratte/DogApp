@@ -12,6 +12,8 @@ addDogRouter.post("/",async(req,res)=>{
         life_span,
         image,
     }= req.body;
+    
+    name = name.trim().charAt(0).toUpperCase() + name.trim().slice(1);
 
     let dogCreated = await Dog.create({
         name,

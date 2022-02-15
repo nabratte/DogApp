@@ -1,0 +1,227 @@
+.GeneralContainer{
+    display: grid;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-items: center;
+    background:url(../Images/PawAndBones.png);
+    background-size: 80%;
+}
+.TopBar{
+    display: flex;
+    margin: 0%;
+    padding: 0%;
+    background-color:#4A4242;
+    color: whitesmoke;
+    justify-content: space-between;
+    align-items: center;
+}
+.Logo{
+    display:flex;
+}
+.Create{
+    display: flex;
+    float: right;
+}
+
+.FirstRow{
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+.Button{
+    float: right;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 15rem;
+    height: auto;
+    border-radius: 3rem;
+    border-style: solid;
+    border-color: #4A4242;
+    border-width: 0.3rem;
+    color: #4A4242;
+    background-color: #9F8E8E;
+    font-size: 1.2rem;
+}
+.Button2{
+    float: right;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 15rem;
+    height: auto;
+    border-radius: 3rem 0 0 3rem;
+    border-style: solid;
+    border-color: #f1dee3;
+    border-width: 0.3rem;
+    color: #f1dee3;
+    background-color: #9F8E8E;
+    font-size: 1.2rem;
+}
+
+.Button3{
+    float: right;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 15rem;
+    height: auto;
+    border-radius: 3rem;
+    border-style: solid;
+    border-color: #f1dee3;
+    border-width: 0.3rem;
+    color: #f1dee3;
+    background-color: #9F8E8E;
+    font-size: 1.2rem;
+}
+
+.PlaceHolder{
+    float: right;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 15rem;
+    height: auto;
+    border-radius: 0 3rem 3rem 0;
+    border-style: solid;
+    border-color: #f1dee3;
+    border-width: 0.3rem;
+    color: #1F1C1C;
+    background-color: #f1dee3;;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.PlaceHolder::placeholder{
+    color:#1F1C1C;
+}
+
+.PaginationContainer{
+    display: box;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.Pagination{
+    width: 90%;
+    display: inline-flex;
+    list-style: none;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.PageNumber{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color:#9F8E8E;
+    border-style: solid;
+    border-color: #4A4242;
+    border-radius: 2rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    font-size: 1.5rem;
+    color: #f1dee3;
+}
+
+.cardContainer{
+    display: grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-gap: 1rem;
+    justify-content: center;
+}
+
+.Reloader{
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+}
+
+h4{
+    font-size: 2rem;
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Kalam', cursive;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column: 2 / 6;
+    color: #1F1C1C;
+}
+
+.FilterContainer{
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.Filter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    margin: 1rem;
+    border-style: solid;
+    border-color: #4A4242;
+    border-radius: 1rem;
+    background-color: #9F8E8E;
+    height: 8rem;
+    width: 22rem;
+}
+
+.Selector{
+    height: 2.2rem;
+    width: 16rem;
+    border-style: solid;
+    border-color: #f1dee3;
+    border-width: 0.3rem;
+    border-radius: 2rem;
+    background-color: #1F1C1C;
+    color: #f1dee3;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.GeneralsContainers{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-center;
+    align-content: center;
+    background:url(../Images/PawAndBones.png);
+    background-size: 80%;
+}
+
+label{
+    background-color: #1F1C1C;
+    border-radius: 1rem;
+    font-size: 2rem;
+    margin: 0%;
+    padding: 0%;
+    width: 20rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Kalam', cursive;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column: 2 / 6;
+    color: #f1dee3;
+}

@@ -1,4 +1,3 @@
-import './App.css';
 import {Route, Routes} from "react-router-dom";
 import LandingPage from './components/LandingPage';
 import React from 'react';
@@ -13,7 +12,7 @@ function App() {
           <Route exact path="/" element={<LandingPage/>}/>
           <Route exact path="/home" element={<Home/>}/>
           <Route exact path='/dog' element={<DogCreator/>}/>
-          <Route exact path="/dogs/:id" element={<Details/>}/>
+          <Route exact path="/details/:id" element={<Details/>}/>
         </Routes>
     </div>
   );

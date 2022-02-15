@@ -1,0 +1,121 @@
+body{
+    display: grid;
+    grid-template-areas: 
+    'header''header''header''header'
+    'main''main''main''main'
+    'main''main''main''main'
+    'footer''footer''footer''footer';
+    margin: 0%;
+    padding: 0%;
+    align-content: center;
+    background: #f1dee3;
+}
+
+.TopBars{
+    grid-area: header;
+    display: flex;
+    margin: 0%;
+    padding: 0%;
+    background-color:#4A4242;
+    color: #f1dee3;
+}
+.TopBars h3{
+    color: #f1dee3;
+    font-size: 200%;
+    font-family: 'Courier New', Courier, monospace;
+}
+.Footer{
+    display: flex;
+    grid-area: footer;
+}
+
+h1{
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Kalam', cursive;
+    font-size: 5rem;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column: 2 / 6;
+    color: #1F1C1C;
+}
+
+.ButtonHolder{
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+    grid-row-start: 3;
+    grid-row-end: 6;
+    grid-column: 1 / 6;
+    width: 100%;
+}
+
+.Button{
+    display: box;
+    width: 200%;
+    height: 150%;
+    font-size: 3rem;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #4A4242;
+    border-width: 0.3rem;
+    color: #4A4242;
+    background-color: #9F8E8E;
+}
+
+.CentralBar{
+    margin: 3rem;
+    align-content: center;
+    justify-content: center;
+    display: block;
+}
+
+.ImagenContainer{
+    background:url(../Images/PawAndBones.png);
+    background-repeat: repeat;
+    background-size: 70%;
+    padding: 5% 5% 9% 5%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    display:block;
+    height: 100%;
+}
+.DogProfile{
+    width: 60%;
+    height: auto;
+}
+.ProfileContainer{
+    background-color: #f1dee3;
+    width: 30rem;
+    height: 30rem;
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 600px;
+    border-style: solid;
+    border-color: #4A4242;
+    border-width: 1rem;
+}
+.ButtonHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ClawLogo{
+    width: 100px;
+}
+
+GeneralsContainer{
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+    height: 100%;
+}
